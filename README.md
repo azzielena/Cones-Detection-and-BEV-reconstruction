@@ -1,3 +1,4 @@
+\title{ADAS PROJECT}
 In our project we focused on the creation of a neural network with the aim of reconstructing the roadway starting from the position of the blue and yellow cones
 in world coordinates that delimit its boundaries.
 
@@ -18,3 +19,4 @@ specific problem.
 
 _Performance Evaluation and Results Visualization_
 This step aimed to evaluate the model's effectiveness in reconstructing the road and localizing the cones accurately.
+
