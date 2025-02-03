@@ -1,4 +1,4 @@
-\title{ADAS PROJECT}
+**ADAS PROJECT**
 In our project we focused on the creation of a neural network with the aim of reconstructing the roadway starting from the position of the blue and yellow cones
 in world coordinates that delimit its boundaries.
 
