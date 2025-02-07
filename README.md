@@ -27,7 +27,7 @@ Reconstruction of roadway boundaries and the centerline.
 ## 📂 Repository Structure
 Here’s how to navigate through the repository:
 
-- **`data_preprocessing`** ➝ Contains input datasets with cone coordinates.
+- **`data_preprocessing/`** ➝ Initial data preprocessing.
   - `sequenze/` ➝ Contains input datasets with cone coordinates.
   - `create_initial_dataset.py` ➝ Extracts the most relevant inputs by removing invalid ones.
   - `create_centered_dataset.py` ➝ Standardizes the inputs, aligning all roadways to start from position (0,0).
@@ -38,6 +38,18 @@ Here’s how to navigate through the repository:
   - `final_dataset/` ➝ Contains the final coordinates of the input and output cones.
   - `grid_input.csv` ➝ CSV file representing the grids containing the coordinates of the input blue and yellow cones.
   - `grid_output.csv` ➝ CSV file representing the grids containing the curves that define the roadway, which the network is trained to predict.
+- **`Nets/`** ➝ Comparison of different neural network models.
+  - `model_result/` ➝ Folder where the trained network models will be saved.
+  - `models_net/` ➝ Developed networks.
+  - `utils.py` ➝ Support functions.
+  - `training_model.py` ➝ File for training the network.
+  - `test_visual_model.py` ➝ File for evaluating the network's performance and visualizing the results.
+- **`model_UNet/`** ➝ **Main project folder** for training and evaluating the **UNET** network.
+  - `model_result/` ➝ Folder where the trained network models will be saved.
+  - `models_net/` ➝ Developed UNET networks.
+  - `utils.py` ➝ Support functions.
+  - `training_model.py` ➝ File for training the network.
+  - `test_visual_model.py` ➝ File for evaluating the network's performance and visualizing the results.
 
 
 ## 🚀 How to Use the Project
