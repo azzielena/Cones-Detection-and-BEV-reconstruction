@@ -16,6 +16,7 @@ def load_grids_from_csv(file_path):
     grids = df.drop(columns=['Frame']).values
     return frames, grids
 
+# Creare un tensore a 3 canali
 def create_three_channel_tensor(single_channel_tensor):
     if single_channel_tensor.dim() == 3 and single_channel_tensor.shape[0] == 1:
         single_channel_tensor = single_channel_tensor.squeeze(0)
@@ -24,10 +25,8 @@ def create_three_channel_tensor(single_channel_tensor):
     channel_center = (single_channel_tensor == 0.5).float()
     return torch.stack([channel_blue, channel_yellow, channel_center], dim=0)
 
+# Ricompone un tensore a 3 canali in un'unica mappa con i valori originali.
 def merge_three_channels(tensor):
-    """
-    Ricompone un tensore a 3 canali in un'unica mappa con i valori originali.
-    """
     output = torch.zeros_like(tensor[0])
     output[tensor[0] > 0.5] = -1       # Valori per il primo canale (blu)
     output[tensor[1] > 0.5] = 1      # Valori per il secondo canale (giallo)
@@ -37,14 +36,16 @@ def merge_three_channels(tensor):
 # Salvataggio del modello migliore
 def save_best_model(model, path):
     torch.save(model.state_dict(), path)
-    
-# PRESTAZIONI
- 
+
+
+############# CALCOLO PRESTAZIONI #################
+
+# MAD
 def calculate_absolute_difference(pred, target):
     return torch.abs(pred - target).mean().item()
  
-#accuracy per categoria
-def calculate_accuracy(output, target): #se out == tar and out !=0: count_right++; a prescindere totale++;
+# Recall per categoria
+def calculate_recall(output, target): #se out == tar and out !=0: count_right++; a prescindere totale++;
     # Crea una maschera per escludere i casi in cui output e target sono entrambi zero
     mask = ~((output == 0) & (target == 0))  # Mantiene solo i valori validi
     filtered_output = output[mask]
@@ -60,21 +61,16 @@ def calculate_accuracy(output, target): #se out == tar and out !=0: count_right+
     right_red = torch.sum((filtered_output == filtered_target) & (filtered_target == 0.5)).item()
     total_red = torch.sum(filtered_target == 0.5).item()
  
-    # Calcolo dell'accuracy per ogni categoria
-    accuracy_yellow = (right_yellow / total_yellow * 100) if total_yellow > 0 else 0
-    accuracy_blue = (right_blue / total_blue * 100) if total_blue > 0 else 0
-    accuracy_red = (right_red / total_red * 100) if total_red > 0 else 0
+    # Calcolo dell'recall per ogni categoria
+    recall_yellow = (right_yellow / total_yellow * 100) if total_yellow > 0 else 0
+    recall_blue = (right_blue / total_blue * 100) if total_blue > 0 else 0
+    recall_red = (right_red / total_red * 100) if total_red > 0 else 0
  
-    return accuracy_yellow, accuracy_red, accuracy_blue
-    
-    
+    return recall_yellow, recall_red, recall_blue
+
+
+# VISUALIZZAZIONE RISULTATI     
 def visualize_results_grid(model, test_loader, device):
-    '''
-    Il primo intervallo [-1.5, -0.5] copre il valore -1.
-    Il secondo intervallo [-0.5, 0.25] copre il valore 0.
-    Il terzo intervallo [0.25, 0.51] copre il valore 0.5.
-    Il quarto intervallo [0.51, 1.5] copre il valore 1.'''
- 
     # Creazione della colormap personalizzata
     colors = ['blue', 'white', 'red','yellow']  # Colori per i valori specificati
     bounds = [-1.5, -0.3, 0.4, 0.51, 1.5]
