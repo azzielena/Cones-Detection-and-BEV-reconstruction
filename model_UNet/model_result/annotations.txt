@@ -1,0 +1,1 @@
+In this folder we will save the models of our network which will then be run on the test set for subsequent evaluation and visualization.
