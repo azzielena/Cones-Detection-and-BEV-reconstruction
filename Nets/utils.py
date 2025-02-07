@@ -16,6 +16,7 @@ def load_grids_from_csv(file_path):
     grids = df.drop(columns=['Frame']).values
     return frames, grids
 
+# Creare un tensore a 3 canali
 def create_three_channel_tensor(single_channel_tensor):
     if single_channel_tensor.dim() == 3 and single_channel_tensor.shape[0] == 1:
         single_channel_tensor = single_channel_tensor.squeeze(0)
@@ -24,10 +25,8 @@ def create_three_channel_tensor(single_channel_tensor):
     channel_center = (single_channel_tensor == 0.5).float()
     return torch.stack([channel_blue, channel_yellow, channel_center], dim=0)
 
+# Ricompone un tensore a 3 canali in un'unica mappa con i valori originali.
 def merge_three_channels(tensor):
-    """
-    Ricompone un tensore a 3 canali in un'unica mappa con i valori originali.
-    """
     output = torch.zeros_like(tensor[0])
     output[tensor[0] > 0.5] = -1       # Valori per il primo canale (blu)
     output[tensor[1] > 0.5] = 1      # Valori per il secondo canale (giallo)
@@ -37,13 +36,15 @@ def merge_three_channels(tensor):
 # Salvataggio del modello migliore
 def save_best_model(model, path):
     torch.save(model.state_dict(), path)
-    
-# PRESTAZIONI
- 
+
+
+############# CALCOLO PRESTAZIONI #################
+
+# MAD
 def calculate_absolute_difference(pred, target):
     return torch.abs(pred - target).mean().item()
  
-#recall per categoria
+# Recall per categoria
 def calculate_recall(output, target): #se out == tar and out !=0: count_right++; a prescindere totale++;
     # Crea una maschera per escludere i casi in cui output e target sono entrambi zero
     mask = ~((output == 0) & (target == 0))  # Mantiene solo i valori validi
@@ -66,11 +67,10 @@ def calculate_recall(output, target): #se out == tar and out !=0: count_right++;
     recall_red = (right_red / total_red * 100) if total_red > 0 else 0
  
     return recall_yellow, recall_red, recall_blue
-    
-    
-def visualize_results_grid(model, test_loader, device):
 
- 
+
+# VISUALIZZAZIONE RISULTATI 
+def visualize_results_grid(model, test_loader, device):
     # Creazione della colormap personalizzata
     colors = ['blue', 'white', 'red','yellow']  # Colori per i valori specificati
     bounds = [-1.5, -0.3, 0.4, 0.51, 1.5]
