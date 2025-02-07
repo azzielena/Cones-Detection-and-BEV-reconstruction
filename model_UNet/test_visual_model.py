@@ -52,7 +52,7 @@ grid_tensors_output = [
 ]
 # Dividi i dati in training e validation set
 x_train, x_test, y_train, y_test = train_test_split(
-    grid_tensors_input, grid_tensors_output, test_size=0.2, random_state=12 #ex seed 42
+    grid_tensors_input, grid_tensors_output, test_size=0.2, random_state=42
 )
  
 x_test = torch.stack(x_test)
