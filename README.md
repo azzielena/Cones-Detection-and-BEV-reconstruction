@@ -1,7 +1,7 @@
-# 📌 Cones Detection and BEV Reconstruction
+# 📌 Cones Detection and BEV Reconstruction - Supervised Roadway Reconstruction with Cones
 
 ## 📖 Project Description
-This project was developed by **[Arianna Cella](https://github.com/ariannaCella)** and **[Elena Azzi](https://github.com/azzielena)** for the course "**AUTONOMOUS DRIVING AND ADAS TECHNOLOGIES**" at the University of Parma. The goal of the project was to develop a neural network designed to reconstruct the roadway by using the positions of the **blue** and **yellow cones** in **world coordinates**, which mark its boundaries.
+This project was developed by **[Arianna Cella](https://github.com/ariannaCella)** and **[Elena Azzi](https://github.com/azzielena)** for the course "**AUTONOMOUS DRIVING AND ADAS TECHNOLOGIES**" at the University of Parma. The goal of the project was to develop a supervised learning neural network aimed at reconstructing the roadway. It uses the positions of the **blue** and **yellow cones** in **world coordinates**, which define the boundaries of the roadway.
 
 ### 📂 Initial Input
 Files containing (x, y) coordinates of yellow and blue cones collected from specific frames.
@@ -36,7 +36,7 @@ Here’s how to navigate through the repository:
 - **`data_CSV/`** ➝ 
 
 ## 🚀 How to Use the Project
-Per eseguire la nostra rete principale UNET e risolvere il task di identificazione della carreggiata si possono eseguire i seguenti passi. 
+To train the main **UNET** model and visualize the results obtained in solving the roadway identification problem, follow the steps described below.
 
 ### 1️⃣ Clone the Repository
 ```bash
@@ -65,4 +65,5 @@ The reconstructed roadway results can be viewed by running the file `test_visual
 
 ## 🤝 Contributions
 This project was developed by **[Arianna Cella](https://github.com/ariannaCella)** and **[Elena Azzi](https://github.com/azzielena)**.
+
 If you would like to contribute, feel free to open an Issue or submit a Pull Request! 🎉
