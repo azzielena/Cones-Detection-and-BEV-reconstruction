@@ -36,6 +36,8 @@ Here’s how to navigate through the repository:
 - **`data_CSV/`** ➝ 
 
 ## 🚀 How to Use the Project
+Per eseguire la nostra rete principale UNET e risolvere il task di identificazione della carreggiata si possono eseguire i seguenti passi. 
+
 ### 1️⃣ Clone the Repository
 ```bash
 git clone https://github.com/azzielena/Cones-Detection-and-BEV-reconstruction.git
@@ -50,18 +52,18 @@ pip install -r requirements.txt
 
 ### 3️⃣ Start Training
 ```bash
-python src/train.py
+python model_UNet/training_model.py
 ```
 
 ### 4️⃣ Evaluate Results
 ```bash
-python src/evaluation.py
+python model_UNet/test_visual_model.py
 ```
 
 ## 🎨 Results Visualization
 The reconstructed roadway results can be viewed in the `results/` folder.
 
 ## 🤝 Contributions
-This project was developed in collaboration with @nome.
+This project was developed in collaboration with @ariannaCella.
 
 If you would like to contribute, feel free to open an Issue or submit a Pull Request! 🎉
