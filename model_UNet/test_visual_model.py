@@ -16,7 +16,7 @@ from sklearn.metrics import mean_squared_error
 
 
 # Caricamento del modello salvato
-model_path = r"model_UNet\model_result\FINAL.pth"
+model_path = r"model_UNet\model_result\best_modelUnet.pth"
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 model = UNet().to(device)
