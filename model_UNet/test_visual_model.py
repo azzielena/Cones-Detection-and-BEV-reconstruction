@@ -1,5 +1,6 @@
 from utils import visualize_results_grid, calculate_absolute_difference, calculate_recall, create_three_channel_tensor, load_grids_from_csv, merge_three_channels
-from uNet512 import UNet
+from model_nets.uNet512 import UNet512
+from model_nets.uNet1024 import UNet1024
 
 import numpy as np
 import matplotlib.pyplot as plt
