@@ -61,9 +61,8 @@ python model_UNet/test_visual_model.py
 ```
 
 ## 🎨 Results Visualization
-The reconstructed roadway results can be viewed in the `results/` folder.
+The reconstructed roadway results can be viewed by running the file `test_visual_model.py`, which allows for a graphical visualization of the roadway reconstruction after training the neural network.
 
 ## 🤝 Contributions
-This project was developed in collaboration with @ariannaCella.
-
+This project was developed by **[Arianna Cella](https://github.com/ariannaCella)** and **[Elena Azzi](https://github.com/azzielena)**.
 If you would like to contribute, feel free to open an Issue or submit a Pull Request! 🎉
