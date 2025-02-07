@@ -1,7 +1,7 @@
 # 📌 Cones Detection and BEV Reconstruction
 
 ## 📖 Project Description
-In our project we focused on the creation of a neural network with the aim of reconstructing the roadway starting from the position of the blue and yellow cones in world coordinates that delimit its boundaries.
+This project was developed by **[Arianna Cella](https://github.com/ariannaCella)** and **[Elena Azzi](https://github.com/azzielena)** for the course "**AUTONOMOUS DRIVING AND ADAS TECHNOLOGIES**" at the University of Parma. The goal of the project was to develop a neural network designed to reconstruct the roadway by using the positions of the **blue** and **yellow cones** in **world coordinates**, which mark its boundaries.
 
 ### 📂 Initial Input
 Files containing (x, y) coordinates of yellow and blue cones collected from specific frames.
