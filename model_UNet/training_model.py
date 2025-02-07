@@ -39,11 +39,8 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
 # Configurazione training
-
 model = UNet512().to(device)
 #model = UNet1024().to(device)
-
-
 
 # Scegli la funzione di perdita: 'mse', 'smooth_l1'
 loss_function_choice = 'mse'
@@ -52,7 +49,6 @@ if loss_function_choice == 'mse':
     criterion = nn.MSELoss()
 elif loss_function_choice == 'smooth_l1':
     criterion = nn.SmoothL1Loss()
-
 
 
 optimizer = optim.Adam(model.parameters(), lr=0.001)
