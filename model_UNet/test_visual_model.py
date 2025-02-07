@@ -13,13 +13,12 @@ import torch.optim as optim
 import matplotlib.colors as mcolors
 
 from sklearn.metrics import mean_squared_error
- 
+
 
 # Caricamento del modello salvato
 model_path = r"model_UNet\best_model\FINAL.pth"
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-# Instanzia la rete
 model = UNet().to(device)
 
 # Scegli la funzione di perdita: 'mse', 'smooth_l1'
@@ -35,11 +34,10 @@ optimizer = optim.Adam(model.parameters(), lr=0.001)
  
 model.load_state_dict(torch.load(model_path))
  
-# Carica i dati dal file CSV
+# Caricamento dati dai file CSV
 file_path_input = 'griglie_input.csv'
 frames, grid_data_input = load_grids_from_csv(file_path_input)
  
-# Carica i dati dal file CSV
 file_path_output = 'griglie_outputPOLY.csv'
 frames, grid_data_output = load_grids_from_csv(file_path_output)
  
