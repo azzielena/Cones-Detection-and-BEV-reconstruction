@@ -21,6 +21,7 @@ from sklearn.metrics import mean_squared_error
 model_path = r"Nets\model_result\best_modelUnet.pth"
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
 # Instanzia la rete
 model = UNet().to(device)
 #model = EncoderDecoder().to(device);
@@ -77,8 +78,6 @@ with torch.no_grad():
         
         output_eval.extend(outputs.squeeze(1).cpu().numpy())
         target_eval.extend(targets.squeeze(1).cpu().numpy())
-        out = merge_three_channels(torch.tensor(outputs.squeeze(1).cpu().numpy()))
-        tar = merge_three_channels(torch.tensor(targets.squeeze(1).cpu().numpy()))
         
         loss = criterion(outputs, targets)
         val_loss += loss.item()
@@ -91,7 +90,7 @@ recall_blue_list = []
  
 #inizio metriche
 for frame_id in range(len(output_eval)):
-    
+     # applico le metriche riunendo i tre canali
     out = merge_three_channels(torch.tensor(output_eval[frame_id]))
     tar = merge_three_channels(torch.tensor(target_eval[frame_id]))
    
@@ -110,12 +109,12 @@ mean_mse = np.mean(mse_list)
 print(f"Mean Squared Error: {mean_mse:.4f}")
 mean_abs_diff = np.mean(abs_diff_list)
 print(f"Mean Absolute Difference: {mean_abs_diff:.4f}")
-mean_accuracy_blue = np.mean(recall_blue_list)
-print(f"Mean Recall Blue: {mean_accuracy_blue:.4f}")
-mean_accuracy_red = np.mean(recall_red_list)
-print(f"Mean Recall Red: {mean_accuracy_red:.4f}")
-mean_accuracy_yellow = np.mean(recall_yellow_list)
-print(f"Mean Recall Yellow: {mean_accuracy_yellow:.4f}")
- 
- 
+mean_recall_blue = np.mean(recall_blue_list)
+print(f"Mean Recall Blue: {mean_recall_blue:.4f}")
+mean_recall_red = np.mean(recall_red_list)
+print(f"Mean Recall Red: {mean_recall_red:.4f}")
+mean_recall_yellow = np.mean(recall_yellow_list)
+print(f"Mean Recall Yellow: {mean_recall_yellow:.4f}")
+
+# Risultati visivi 
 visualize_results_grid(model, test_loader, device)
