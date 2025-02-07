@@ -1,6 +1,6 @@
-# 📌 Cones Detection and BEV Reconstruction - Supervised Roadway Reconstruction with Cones
+# 📌 Cones Detection and BEV Reconstruction 
 
-## 📖 Project Description
+## 📖 Project Description - Supervised Roadway Reconstruction with Cones
 This project was developed by **[Arianna Cella](https://github.com/ariannaCella)** and **[Elena Azzi](https://github.com/azzielena)** for the course "**AUTONOMOUS DRIVING AND ADAS TECHNOLOGIES**" at the University of Parma. The goal of the project was to develop a supervised learning neural network aimed at reconstructing the roadway. It uses the positions of the **blue** and **yellow cones** in **world coordinates**, which define the boundaries of the roadway.
 
 ### 📂 Initial Input
