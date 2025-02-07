@@ -39,7 +39,7 @@ test_loader = DataLoader(TensorDataset(x_test, y_test), batch_size=32, shuffle=F
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
-# Configurazione training
+# Configurazione training, selezionare quella desiderata e modificare di conseguenza anche il model_save_path 
 #model = EncoderDecoder().to(device)
 model = UNet().to(device)
 #model = CNNModel().to(device)
