@@ -20,7 +20,7 @@ from sklearn.metrics import mean_squared_error
 model_path = r"model_UNet\model_result\best_modelUnet.pth"
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-model = UNet().to(device)
+model = UNet512().to(device)
 
 # Scegli la funzione di perdita: 'mse', 'smooth_l1'
 loss_function_choice = 'mse'
