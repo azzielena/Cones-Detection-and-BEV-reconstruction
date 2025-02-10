@@ -1,6 +1,7 @@
 from utils import visualize_results_grid, calculate_absolute_difference, calculate_recall, create_three_channel_tensor, load_grids_from_csv, merge_three_channels
 from model_nets.uNet512 import UNet512
 from model_nets.uNet1024 import UNet1024
+import time
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -58,7 +59,7 @@ x_train, x_test, y_train, y_test = train_test_split(
 x_test = torch.stack(x_test)
 y_test = torch.stack(y_test)
 test_dataset = TensorDataset(x_test, y_test)
-test_loader = DataLoader(test_dataset, batch_size=16, shuffle=False)
+test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
  
 model.eval()
 val_loss = 0
@@ -74,7 +75,32 @@ with torch.no_grad():
 
         loss = criterion(outputs, targets)
         val_loss += loss.item()
+
+test_loader = DataLoader(test_dataset, batch_size=1, shuffle=False)
  
+model.eval()
+val_loss = 0
+output_eval = []
+target_eval =[]
+elapsed = 0
+with torch.no_grad():
+    for data in test_loader:
+        inputs, targets = data[0].to(device), data[1].to(device)
+        start = time.time()
+        outputs= model(inputs)
+        end = time.time()
+        elapsed += end - start
+        output_eval.extend(outputs.squeeze(1).cpu().numpy())
+        target_eval.extend(targets.squeeze(1).cpu().numpy())
+ 
+        loss = criterion(outputs, targets)
+        val_loss += loss.item()
+       
+elapsed = elapsed / len(test_loader)
+print("Mean execution time: ", elapsed*1000, " ms")
+print(len(test_loader))
+
+
 mse_list = []
 abs_diff_list = []
 recall_red_list = []
