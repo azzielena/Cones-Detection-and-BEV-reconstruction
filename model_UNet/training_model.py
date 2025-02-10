@@ -1,7 +1,7 @@
 from utils import load_grids_from_csv,create_three_channel_tensor, save_best_model
 from model_nets.uNet512 import UNet512
 from model_nets.uNet1024 import UNet1024
-
+import time
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -59,6 +59,7 @@ early_stopping_counter = 0
 model_save_path = "model_UNet/model_result/best_modelUnet.pth"
 
 # Training con early stopping
+start = time.time()
 for epoch in range(num_epochs):
     model.train()
     train_loss = 0
@@ -97,7 +98,8 @@ for epoch in range(num_epochs):
         break
 
 
-
+end = time.time()
+print("training time: ", (end-start), " s")
 # Caricamento del modello migliore per il test finale
 model.load_state_dict(torch.load(model_save_path))
 model.eval()
